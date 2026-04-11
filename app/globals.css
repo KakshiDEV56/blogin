@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 8%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 8%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 142 70% 58%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 10% 12%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 10% 12%;
+    --input: 240 10% 12%;
+    --ring: 142 70% 58%;
+    --radius: 1rem;
+  }
+
+  /* Light theme */
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 4%;
+    --primary: 142 70% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 3.7% 85%;
+    --secondary-foreground: 240 10% 4%;
+    --muted: 240 3.7% 80%;
+    --muted-foreground: 240 5% 35%;
+    --accent: 240 3.7% 85%;
+    --accent-foreground: 240 10% 4%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 90%;
+    --input: 240 3.7% 90%;
+    --ring: 142 70% 45%;
+  }
+
+  /* Keep .dark for compatibility */
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 6.7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 6.7%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 142 70% 58%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 142 70% 58%;
+  }
+
+  body {
+    @apply bg-background text-foreground selection:bg-primary/30 scroll-smooth;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply lowercase font-bold tracking-tight text-foreground;
+  }
+
+  /* Theme Transition Styles */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(root) {
+    z-index: 1;
+  }
+
+  ::view-transition-new(root) {
+    z-index: 9999;
+  }
+
+  .light::view-transition-old(root) {
+    z-index: 9999;
+  }
+
+  .light::view-transition-new(root) {
+    z-index: 1;
+  }
+}
+
+@layer utilities {
+  .prose-custom {
+    @apply max-w-none;
+  }
+
+  .prose-custom h1,
+  .prose-custom h2,
+  .prose-custom h3 {
+    @apply font-bold tracking-tight text-foreground lowercase mt-8 mb-4;
+  }
+
+  .prose-custom p {
+    @apply leading-relaxed mb-4 text-muted-foreground;
+  }
+
+  .prose-custom pre {
+    @apply bg-black border border-white/10 rounded-none p-4 overflow-x-auto font-mono text-sm my-6;
+  }
+
+  .prose-custom code {
+    @apply bg-muted text-primary font-mono text-sm px-1.5 py-0.5 rounded;
+  }
+
+  .prose-custom a {
+    @apply text-primary hover:underline hover:cursor-pointer transition-colors;
+  }
+
+  .theme-transition-circle {
+    clip-path: circle(0% at var(--x) var(--y));
+  }
+
+  .space-y-24 > :first-child {
+    margin-top: 0;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .text-7xl {
+      font-size: 4.5rem;
+    }
+    header {
+      padding-top: 2rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .text-7xl {
+      font-size: 3.5rem;
+    }
+    .grid-cols-1 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    .p-6 {
+      padding: 1.5rem;
+    }
+  }
+}
