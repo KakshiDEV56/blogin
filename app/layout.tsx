@@ -4,7 +4,9 @@ import "./globals.css";
 import { SearchModal } from "@/components/search/SearchModal";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Analytics } from "@vercel/analytics/next";
 import { cn } from "@/lib/utils";
+
 
 const inter = Inter({
   variable: "--font-inter",
@@ -56,6 +58,7 @@ export default function RootLayout({
           {children}
           <SearchModal />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
