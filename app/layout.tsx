@@ -51,7 +51,7 @@ export default function RootLayout({
           enableSystem={true}
           storageKey="blogin-theme"
         >
-          <div className="fixed top-4 right-4 md:top-6 md:right-10 z-[60] flex items-center gap-2 md:gap-4 transition-all">
+          <div className="fixed top-4 right-4 md:top-6 md:right-6 z-[60] flex items-center gap-1 md:gap-2 transition-all">
             <SearchTrigger />
             <ThemeToggle />
           </div>

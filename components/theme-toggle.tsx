@@ -31,11 +31,11 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon" className="rounded-full w-9 h-9 opacity-50" disabled>
-          <GithubIcon className="w-[1.1rem] h-[1.1rem]" />
-        </Button>
-        <Button variant="ghost" size="icon" className="rounded-full w-9 h-9 border border-border/40 opacity-50" disabled />
+      <div className="flex items-center gap-1.5">
+        <button className="inline-flex items-center justify-center rounded-full w-8 h-8 hover:bg-muted/50 transition-colors opacity-50" disabled>
+          <GithubIcon className="w-5 h-5" />
+        </button>
+        <button className="inline-flex items-center justify-center rounded-full w-8 h-8 border border-border/40 hover:bg-muted/50 transition-colors opacity-50" disabled />
       </div>
     );
   }
@@ -81,29 +81,26 @@ export function ThemeToggle() {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1.5">
       <a 
         href="https://github.com/KakshiDEV56/blogin" 
         target="_blank" 
         rel="noopener noreferrer"
-        className="flex items-center justify-center p-2 rounded-full hover:bg-muted/50 transition-colors"
+        className="inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-muted/50 transition-colors"
         title="View on GitHub"
       >
-        <GithubIcon className="w-[1.2rem] h-[1.2rem]" />
+        <GithubIcon className="w-5 h-5" />
       </a>
-      
-      <div className="h-4 w-px bg-border/40 mx-1" />
 
-      <Button
-        variant="ghost"
-        size="icon"
-        className="rounded-full w-9 h-9 border border-border/40 hover:bg-muted/50 transition-all active:scale-95 group relative flex items-center justify-center"
+      <button
         onClick={handleToggle}
+        className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-border/40 hover:bg-muted/50 transition-all active:scale-95"
+        title="Toggle theme"
       >
-        <div className="relative w-[1.1rem] h-[1.1rem]">
-          <Moon className={`absolute inset-0 transition-all duration-300 ${theme === 'dark' ? 'rotate-0 scale-100 opacity-100' : 'rotate-90 scale-0 opacity-0'}`} />
+        <div className="relative w-5 h-5">
+          <Moon className={`absolute inset-0 w-5 h-5 transition-all duration-300 ${theme === 'dark' ? 'rotate-0 scale-100 opacity-100' : 'rotate-90 scale-0 opacity-0'}`} />
           <svg
-            className={`absolute inset-0 transition-all duration-300 ${theme === 'light' ? 'rotate-0 scale-100 opacity-100' : 'rotate-90 scale-0 opacity-0'}`}
+            className={`absolute inset-0 w-5 h-5 transition-all duration-300 ${theme === 'light' ? 'rotate-0 scale-100 opacity-100' : 'rotate-90 scale-0 opacity-0'}`}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -122,7 +119,7 @@ export function ThemeToggle() {
             <path d="m17.657 17.657.707.707" />
           </svg>
         </div>
-      </Button>
+      </button>
     </div>
   );
 }
