@@ -100,7 +100,7 @@ function SearchResults({
   if (results.length === 0) {
     return (
       <div className="text-center text-gray-500 py-8">
-        <p>No results found for "{query}"</p>
+        <p>{`No results found for "${query}"`}</p>
       </div>
     );
   }

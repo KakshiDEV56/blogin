@@ -55,6 +55,7 @@ export function SearchModal() {
         const response = await fetch(`/api/search?q=${encodeURIComponent(debouncedQuery)}`);
         if (!response.ok) throw new Error('Search failed');
         const data = await response.json();
+        console.log(`[SearchModal] Query: "${debouncedQuery}" returned ${data?.length || 0} results`);
         setResults(data);
       } catch (error) {
         console.error('Search error:', error);
@@ -73,24 +74,22 @@ export function SearchModal() {
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
-      <Command>
+      <Command className="bg-[#111111] dark:bg-[#111111] text-zinc-100 border border-white/10">
         <CommandInput 
-          placeholder="grep --recursive ./thoughts" 
+          placeholder="Search..." 
           value={query}
           onValueChange={setQuery}
-          className="font-mono lowercase"
+          className="font-mono text-sm border-none ring-0 placeholder:text-zinc-500"
         />
         <CommandList 
           ref={listRef}
           className="max-h-[60vh] overflow-y-auto scroll-smooth"
         >
-          <CommandEmpty className="py-6 text-center text-xs font-mono text-muted-foreground uppercase tracking-widest">
-            {loading ? (
-              <span className="animate-pulse">scanning system...</span>
-            ) : (
-              `errno 404: no matches for "${query}"`
-            )}
-          </CommandEmpty>
+          {results?.length === 0 && query.length > 0 && !loading && (
+            <CommandEmpty className="py-6 text-center text-xs font-mono text-muted-foreground uppercase tracking-widest">
+              errno 404: no matches for &quot;{query}&quot;
+            </CommandEmpty>
+          )}
           
           <CommandGroup heading="quick_actions" className="font-mono text-[10px] uppercase text-muted-foreground tracking-widest px-2">
             <CommandItem 
@@ -131,25 +130,13 @@ export function SearchModal() {
                   <span>{blog.title}</span>
                 </div>
                 <div className="text-[11px] text-muted-foreground leading-relaxed line-clamp-3 w-full">
-                  {blog.content.split('\n').map((line: string, i: number) => {
-                    const queryLower = query.toLowerCase();
-                    const lineLower = line.toLowerCase();
-                    if (lineLower.includes(queryLower)) {
-                      const parts = line.split(new RegExp(`(${query})`, 'gi'));
-                      return (
-                        <div key={i} className="mb-1 opacity-80 overflow-hidden text-ellipsis">
-                          {parts.map((part, j) => 
-                            part.toLowerCase() === queryLower ? (
-                              <span key={j} className="text-primary font-bold bg-primary/20 px-0.5 rounded-sm">
-                                {part}
-                              </span>
-                            ) : part
-                          )}
-                        </div>
-                      );
-                    }
-                    return null;
-                  }).filter(Boolean).slice(0, 3)}
+                  {blog.content ? (
+                    <div className="opacity-80">
+                      {blog.content.substring(0, 150)}...
+                    </div>
+                  ) : (
+                    <div className="opacity-50">No preview available</div>
+                  )}
                 </div>
               </CommandItem>
             </CommandGroup>
